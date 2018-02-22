@@ -26,3 +26,7 @@ workflows:
     jobs:
       - validate_commitizen
 ```
+
+## Utils
+getting commit range on a PR
+`COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)`
