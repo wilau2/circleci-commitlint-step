@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name:
+          name: validate commit message
           command: |
             COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
             sh /.scripts/validate-commit-message.sh ${COMMIT_RANGE}
