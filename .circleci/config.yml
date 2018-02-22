@@ -12,7 +12,13 @@ jobs:
       - run:
           name: commitlint
           command: |
+            echo commitlint
             COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
+            echo ${COMMIT_RANGE}
+            BRANCH_LATEST_COMMIT=$(git rev-parse HEAD)
+            echo ${BRANCH_LATEST_COMMIT}
+            COMMIT_RANGE=master...${BRANCH_LATEST_COMMIT}
+            echo ${COMMIT_RANGE}
             bash /.scripts/commitlint_range.sh ${COMMIT_RANGE}
 workflows:
   version: 2
