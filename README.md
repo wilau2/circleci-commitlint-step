@@ -1,6 +1,9 @@
 # Circleci 2.0 example
 
-commit message validation with validate-commit-msg npm package
+Circleci commit message validation with `validate-commit-msg` npm package
+
+## How to use it? 
+It is very simple. Just add the following to you circleci `config.yml`:
 
 ```
 version: 2
@@ -27,6 +30,21 @@ workflows:
       - validate_commitizen
 ```
 
+## How to build your own? 
+Fork this project. Change the `validate-commit-msg` version in the `Dockerfile`
+```
+npm run docker:build
+npm run docker:push
+```
+
+## Contribute
+If you think you can make this circleci job step better. Don't be shy to create a pull request.
+
 ## Utils
 getting commit range on a PR
 `COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)`
+
+## References
+
+- [validate-commit-msg](https://www.npmjs.com/package/validate-commit-msg)
+- [commitizen](https://github.com/commitizen/cz-cli)
