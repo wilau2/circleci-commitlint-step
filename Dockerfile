@@ -2,10 +2,8 @@ FROM node:9.5.0-alpine
 
 RUN apk add --update bash git
 
-COPY validate-commit-message.sh .scripts/validate-commit-message.sh
+COPY commitlint_range.sh .scripts/commitlint_range.sh
 
-RUN cd www; npm install
-
-RUN npm install validate-commit-msg -g
+RUN npm install @commitlint/cli -g
 
 WORKDIR www

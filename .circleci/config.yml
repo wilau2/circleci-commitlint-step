@@ -1,21 +1,21 @@
 version: 2
 references:
-  container_config: &circleci-validate-commit-msg
+  container_config: &circleci-commitlint
     docker:
-      - image: williamlauze/circleci-validate-commit-msg:latest
+      - image: williamlauze/circleci-commitlint:latest
     working_directory: /www
 jobs:
-  validate_commitizen:
-    <<: *circleci-validate-commit-msg
+  commitlint:
+    <<: *circleci-commitlint
     steps:
       - checkout
       - run:
-          name: validate commit message
+          name: commitlint
           command: |
             COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
-            sh /.scripts/validate-commit-message.sh ${COMMIT_RANGE}
+            bash /.scripts/commitlint_range.sh ${COMMIT_RANGE}
 workflows:
   version: 2
   my_pipeline:
     jobs:
-      - validate_commitizen
+      - commitlint
