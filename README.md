@@ -1,6 +1,14 @@
+[![CircleCI](https://circleci.com/gh/wilau2/circleci-validate-commit-msg/tree/master.svg?style=svg)](https://circleci.com/gh/wilau2/circleci-validate-commit-msg/tree/master)
+
 # Circleci 2.0 example
 
 Circleci commit message validation with `validate-commit-msg` npm package
+
+## What it does? 
+
+- Branch `master` is working in [circleci](https://circleci.com/gh/wilau2/circleci-validate-commit-msg/tree/master)
+
+- Branch `example-wrong-commit-name` is failing in [circleci](https://circleci.com/gh/wilau2/circleci-validate-commit-msg/tree/example-wrong-commit-name)
 
 ## How to use it? 
 It is very simple. Just add the following to you circleci `config.yml`:
