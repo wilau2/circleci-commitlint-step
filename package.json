@@ -1,7 +1,7 @@
 {
-  "name": "circleci-validate-commit-msg",
+  "name": "circleci-commitlint",
   "scripts": {
-    "docker:build": "docker build -t williamlauze/circleci-validate-commit-msg . --no-cache",
-    "docker:push": "docker push williamlauze/circleci-validate-commit-msg"
+    "docker:build": "docker build -t williamlauze/circleci-commitlint . --no-cache",
+    "docker:push": "docker push williamlauze/circleci-commitlint"
   }
 }

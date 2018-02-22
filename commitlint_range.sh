@@ -8,4 +8,4 @@ set -o nounset
 
 COMMIT_RANGE=$1
 
-git log ${COMMIT_RANGE} --pretty=%B | xargs -I {} validate-commit-msg {}
+git log ${COMMIT_RANGE} --pretty=%B | commitlint
