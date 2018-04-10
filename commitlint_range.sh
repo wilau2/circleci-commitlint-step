@@ -6,7 +6,7 @@ set -o nounset
 # set -o xtrace
 # set -o pipefail
 
-if [ -n "CIRCLE_PULL_REQUEST" ]
+if [ -n "${CIRCLE_PULL_REQUEST}" ]
 then
   PULL_REQUEST_NUMBER=$(echo "${CIRCLE_PULL_REQUEST}" | cut -d/ -f7)
   BASE_SHA1=$(curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${PULL_REQUEST_NUMBER} | jq -r .base.sha)
