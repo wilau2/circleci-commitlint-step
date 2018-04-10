@@ -12,8 +12,8 @@ jobs:
       - run:
           name: commitlint
           command: |
-            COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
-            bash /.scripts/commitlint_range.sh ${COMMIT_RANGE}
+            /bin/sh /.scripts/commitlint_range.sh
+
 workflows:
   version: 2
   my_pipeline:
