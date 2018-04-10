@@ -12,14 +12,8 @@ jobs:
       - run:
           name: commitlint
           command: |
-            if [ -n "CIRCLE_PULL_REQUEST" ]
-            then
-              PULL_REQUEST_NUMBER=$(echo "${CIRCLE_PULL_REQUEST}" | cut -d/ -f8)
-              BASE_SHA1=$(curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${PULL_REQUEST_NUMBER} | jq .base.sha)
-              HEAD_SHA1=$(curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${PULL_REQUEST_NUMBER} | jq .head.sha)
-              COMMIT_RANGE=${BASE_SHA1}...${HEAD_SHA1}
-              bash /.scripts/commitlint_range.sh ${COMMIT_RANGE}
-            fi
+            /bin/sh /.scripts/commitlint_range.sh
+
 workflows:
   version: 2
   my_pipeline:

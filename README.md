@@ -2,7 +2,7 @@
 
 # Circleci 2.0 example
 
-Circleci commit message validation with `validate-commit-msg` npm package
+Circleci commit message validation with `commitlint` npm package
 
 ## What it does? 
 
@@ -10,49 +10,34 @@ Circleci commit message validation with `validate-commit-msg` npm package
 
 - Branch `example-wrong-commit-name` is failing in [circleci](https://circleci.com/gh/wilau2/circleci-validate-commit-msg/tree/example-wrong-commit-name)
 
-## How to use it? 
-It is very simple. Just add the following to you circleci `config.yml`:
+## Use 
+Add the following step to your circleci `config.yml`:
 
 ```
 version: 2
 references:
-  container_config: &circleci-validate-commit-msg
+  container_config: &circleci-commitlint
     docker:
-      - image: williamlauze/circleci-validate-commit-msg:latest
+      - image: williamlauze/circleci-commitlint:latest
     working_directory: /www
-
 jobs:
-  validate_commitizen:
-    <<: *circleci-validate-commit-msg
+  commitlint:
+    <<: *circleci-commitlint
     steps:
       - checkout
       - run:
-          name: validate commit message
+          name: commitlint
           command: |
-            COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
-            sh /.scripts/validate-commit-message.sh ${COMMIT_RANGE}
+            /bin/sh /.scripts/commitlint_range.sh
+
 workflows:
   version: 2
   my_pipeline:
     jobs:
-      - validate_commitizen
+      - commitlint
 ```
-
-## How to build your own? 
-Fork this project. Change the `validate-commit-msg` version in the `Dockerfile`
-```
-npm run docker:build
-npm run docker:push
-```
-
-## Contribute
-If you think you can make this circleci job step better. Don't be shy to create a pull request.
-
-## Utils
-getting commit range on a PR
-`COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)`
 
 ## References
 
-- [validate-commit-msg](https://www.npmjs.com/package/validate-commit-msg)
+- [commitlint](https://github.com/marionebl/commitlint)
 - [commitizen](https://github.com/commitizen/cz-cli)
