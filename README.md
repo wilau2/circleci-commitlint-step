@@ -8,7 +8,7 @@ Circleci commit message validation with `commitlint` npm package
 
 - Branch `master` is working in [circleci](https://circleci.com/gh/wilau2/circleci-validate-commit-msg/tree/master)
 
-- Branch `example-wrong-commit-name` is failing in [circleci](https://circleci.com/gh/wilau2/circleci-validate-commit-msg/tree/example-wrong-commit-name)
+- Branch `wrong-commit-name` is failing in [circleci](https://circleci.com/gh/wilau2/circleci-validate-commit-msg/tree/example-wrong-commit-name)
 
 ## Use 
 Add the following step to your circleci `config.yml`:
@@ -36,10 +36,6 @@ workflows:
     jobs:
       - commitlint
 ```
-
-## Limitations
-
-This step will only run for the pull requests
 
 ## References
 
