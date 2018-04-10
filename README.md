@@ -37,6 +37,10 @@ workflows:
       - commitlint
 ```
 
+## Limitations
+
+This step will only run for the pull requests
+
 ## References
 
 - [commitlint](https://github.com/marionebl/commitlint)
