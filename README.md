@@ -3,9 +3,9 @@ Commit message validation with `commitlint` npm package
 
 ## What it does? 
 
-![alt text](https://github.com/wilau2/circleci-commitlint-step/blob/master/.github/circleci_fail.png)
+![alt text](https://github.com/wilau2/circleci-commitlint-step/blob/master/.github/circle_fail.png)
 
-![alt text](https://github.com/wilau2/circleci-commitlint-step/blob/master/.github/circleci_sucess.png)
+![alt text](https://github.com/wilau2/circleci-commitlint-step/blob/master/.github/circle_success.png)
 
 ## Use 
 Add the following step to your circleci `config.yml`:
