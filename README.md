@@ -1,18 +1,15 @@
-[![CircleCI](https://circleci.com/gh/wilau2/circleci-validate-commit-msg/tree/master.svg?style=svg)](https://circleci.com/gh/wilau2/circleci-validate-commit-msg/tree/master)
+# circleci-commitlint-step [![CircleCI](https://circleci.com/gh/wilau2/circleci-commitlint-step/tree/master.svg?style=svg)](https://circleci.com/gh/wilau2/circleci-commitlint-step/tree/master)
 
-# Circleci 2.0 example
-
-Circleci commit message validation with `commitlint` npm package
+Commit message validation with `commitlint` npm package
 
 ## What it does? 
 
-- Branch `master` is working in [circleci](https://circleci.com/gh/wilau2/circleci-validate-commit-msg/tree/master)
+![alt text](https://github.com/wilau2/circleci-commitlint-step/blob/master/.github/circleci_fail.png)
 
-- Branch `wrong-commit-name` is failing in [circleci](https://circleci.com/gh/wilau2/circleci-validate-commit-msg/tree/example-wrong-commit-name)
+![alt text](https://github.com/wilau2/circleci-commitlint-step/blob/master/.github/circleci_sucess.png)
 
 ## Use 
 Add the following step to your circleci `config.yml`:
-
 ```
 version: 2
 references:
@@ -38,6 +35,5 @@ workflows:
 ```
 
 ## References
-
 - [commitlint](https://github.com/marionebl/commitlint)
 - [commitizen](https://github.com/commitizen/cz-cli)
