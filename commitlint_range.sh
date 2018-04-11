@@ -6,12 +6,26 @@ set -o errexit
 # set -o xtrace
 # set -o pipefail
 
-if [ -n "$CIRCLE_PULL_REQUEST" ]
+
+
+
+if [ -n "${CIRCLE_PULL_REQUEST}" ]
 then
   echo "This is a pull request"
   PULL_REQUEST_NUMBER=$(echo "${CIRCLE_PULL_REQUEST}" | cut -d/ -f7)
-  BASE_SHA1=$(curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${PULL_REQUEST_NUMBER} | jq -r .base.sha)
-  HEAD_SHA1=$(curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${PULL_REQUEST_NUMBER} | jq -r .head.sha)
+  PULL_REQUEST_DETAILS=$(curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${PULL_REQUEST_NUMBER})
+  REPO_IS_PRIVATE=$(echo "${PULL_REQUEST_DETAILS}" | jq -r .url)
+  if [ -n "${REPO_IS_PRIVATE}" ]
+  then
+    echo "Private repo"
+    PULL_REQUEST_DETAILS=$(curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${PULL_REQUEST_NUMBER}?access_token=${GITHUB_TOKEN_COMMITLINT})
+  else
+    echo "Public repo"
+  fi
+
+  BASE_SHA1=$(echo "${PULL_REQUEST_DETAILS}" | jq -r .base.sha)
+  HEAD_SHA1=$(echo "${PULL_REQUEST_DETAILS}" | jq -r .head.sha)
+
   COMMIT_RANGE="${BASE_SHA1}...${HEAD_SHA1}"
 else
   COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
