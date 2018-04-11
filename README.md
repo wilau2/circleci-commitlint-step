@@ -33,6 +33,11 @@ workflows:
       - commitlint
 ```
 
+## Private repo settings
+You will need to have a github OAUTH token to get the pull request details
+Create an environment variable in your circleci repository
+`GITHUB_TOKEN_COMMITLINT=yourToken`
+
 ## References
 - [commitlint](https://github.com/marionebl/commitlint)
 - [commitizen](https://github.com/commitizen/cz-cli)
