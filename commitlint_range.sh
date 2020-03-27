@@ -1,13 +1,10 @@
 #!/usr/bin/env bash
 set -o errexit
-#set -o nounset
+# set -o nounset
 
-#For debugging purposes
+# For debugging purposes
 # set -o xtrace
 # set -o pipefail
-
-
-
 
 if [ -n "${CIRCLE_PULL_REQUEST}" ]
 then
@@ -18,7 +15,7 @@ then
   if [ -n "${REPO_IS_PRIVATE}" ]
   then
     echo "Private repo"
-    PULL_REQUEST_DETAILS=$(curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${PULL_REQUEST_NUMBER}?access_token=${GITHUB_TOKEN_COMMITLINT})
+    PULL_REQUEST_DETAILS=$(curl -H "Authorization: token ${GITHUB_TOKEN_COMMITLINT}" https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${PULL_REQUEST_NUMBER})
   else
     echo "Public repo"
   fi
