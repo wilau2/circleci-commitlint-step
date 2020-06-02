@@ -10,14 +10,16 @@ if [ -n "${CIRCLE_PULL_REQUEST}" ]
 then
   echo "This is a pull request"
   PULL_REQUEST_NUMBER=$(echo "${CIRCLE_PULL_REQUEST}" | cut -d/ -f7)
-  PULL_REQUEST_DETAILS=$(curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${PULL_REQUEST_NUMBER})
+  UPSTREAM_PROJECT_USERNAME=$(echo "${CIRCLE_PULL_REQUEST}" | cut -d/ -f4)
+  CURL_URL="https://api.github.com/repos/${UPSTREAM_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${PULL_REQUEST_NUMBER}"
+  PULL_REQUEST_DETAILS=$(curl ${CURL_URL})
   REPO_IS_PUBLIC=$(echo "${PULL_REQUEST_DETAILS}" | jq -r .url)
   if [ -n "${REPO_IS_PUBLIC}" ]
   then
     echo "Public repo"
   else
     echo "Private repo"
-    PULL_REQUEST_DETAILS=$(curl -H "Authorization: token ${GITHUB_TOKEN_COMMITLINT}" https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${PULL_REQUEST_NUMBER})
+    PULL_REQUEST_DETAILS=$(curl -H "Authorization: token ${GITHUB_TOKEN_COMMITLINT}" ${CURL_URL})
   fi
 
   BASE_SHA1=$(echo "${PULL_REQUEST_DETAILS}" | jq -r .base.sha)
